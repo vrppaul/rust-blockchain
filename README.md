@@ -4,13 +4,15 @@
 
 ## TODO
 
-- [ ] Make up a purpose of the blockchain
+- [ ] Come up with a purpose of the blockchain
 - [x] Blockchain/Block/Transaction structures
 - [x] Transactions have weight, which decides the speed of transaction verification
 - [x] Some mining algorithm
-- [ ] CLI application, which lets either create a transaction or mine a block
+- [x] CLI application, which lets either create a transaction or mine a block
+- [ ] Multiple nodes can interact with blockchain at least locally
 - [ ] Some sort of data persistance at least locally
 - [ ] Transaction signing
 - [ ] Mining reward
 - [ ] P2P communication
 - [ ] All miners mine same block
+- [ ] Add `rustyline` as a CLI editor: https://docs.rs/rustyline/8.2.0/rustyline/

@@ -1,23 +1,34 @@
-use blockchain::{Block, BlockChain};
-use blockchain::transaction::Transaction;
+use std::io;
+use std::io::Write;
+
+use blockchain::commands;
+use blockchain::BlockChain;
 
 fn main() {
-    let initial_block = Block::new(vec![]);
+    let mut blockhain = initiate_blockchain(3);
 
-    let mut blockchain = BlockChain {
-        blocks: vec![initial_block],
-        complexity: 3,
-        transaction_pool: Default::default(),
-        block_to_mine: None
-    };
+    run_command_loop(&mut blockhain);
+}
 
-    for i in 0..=10 {
-        let new_transaction = Transaction {
-            data: "Initial data".to_string(),
-            weight: 1.0 * (i as f32 / 10.0),
-        };
-        blockchain.schedule_transaction(new_transaction);
+fn initiate_blockchain(complexity: usize) -> BlockChain {
+    BlockChain::new(complexity)
+}
+
+fn run_command_loop(blockhain: &mut BlockChain) {
+    commands::show_commands();
+    println!("Enter some command.");
+
+    loop {
+        let mut input = String::new();
+
+        print!("\n> ");
+        io::stdout().flush().unwrap();
+
+        io::stdin()
+            .read_line(&mut input)
+            .expect("error: unable to read user input");
+
+        let command = input.trim();
+        commands::process_command(command, blockhain);
     }
-
-    blockchain.confirm_transactions();
 }
